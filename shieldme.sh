@@ -5,12 +5,50 @@
 
 if [ -f /etc/redhat-release ]; then
   yum -y update
-  yum -y install ipset iptables curl
+  yum -y install ipset iptables curl fontconfig libfontconfig
 fi
 
 if [ -f /etc/lsb-release ]; then
   apt-get -y update
-  apt-get install -y ipset iptables curl
+  apt-get install -y ipset iptables curl fontconfig libfontconfig
+fi
+
+echo [+] Dropping script for phantomjs
+
+cat >> 7.js << EOF
+var page = require('webpage').create();
+var system = require('system'); 
+url = system.args[1] 
+page.settings.loadImages = false;
+page.settings.userAgent = 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7';
+page.open(url, function(status) {
+    if (status === "success") {
+        setTimeout(function() {
+            console.log(page.content);
+            phantom.exit();
+        },10000);
+    }
+});
+EOF
+
+echo [+] Unpacking phantomjs distribution
+
+MACHINE_TYPE=`uname -m`
+if [ ${MACHINE_TYPE} == 'x86_64' ]; then
+  tar xvjf phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
+  echo [+] downloading blocks for digital ocean addresses from https://bgp.he.net/search?search[search]=digitalocean&commit=Search
+  phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search[search]=digitalocean&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > digitalocean.txt
+  
+  echo [+] downloading blocks for IBM addresses from https://bgp.he.net/search?search[search]=IBM&commit=Search
+  phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search[search]=IBM&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > ibm.txt
+  
+else
+  tar xvjf phantomjs/phantomjs-2.1.1-linux-i686.tar.bz2
+  echo [+] downloading blocks for digital ocean addresses from https://bgp.he.net/search?search[search]=digitalocean&commit=Search
+  phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search[search]=digitalocean&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > digitalocean.txt
+  
+  echo [+] downloading blocks for IBM addresses from https://bgp.he.net/search?search[search]=IBM&commit=Search
+  phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search[search]=IBM&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > ibm.txt
 fi
 
 echo [+] downloading IPs for current tor exit node addresses from https://check.torproject.org/exit-addresses
@@ -18,12 +56,6 @@ curl https://check.torproject.org/exit-addresses | grep ExitAddress | awk '{prin
 
 echo [+] downloading IPs for tor exit node addresses from https://www.dan.me.uk/torlist/
 curl https://www.dan.me.uk/torlist/ | sort | uniq > tor_current_nodes_torlist.txt
-
-echo [+] downloading blocks for digital ocean addresses from https://bgp.he.net/search?search[search]=digitalocean&commit=Search
- > digitalocean.txt
-
-echo [+] downloading blocks for IBM ocean addresses from https://bgp.he.net/search?search[search]=digitalocean&commit=Search
-curl -i -s -k  -X $'GET' -H $'Host: bgp.he.net' -H $'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0' -H $'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' -H $'Accept-Language: en-GB,en;q=0.5' -H $'Accept-Encoding: gzip, deflate' -H $'Cookie: c=BAgiEzUxLjE0OC4xMTUuMTc3--fe45cb679a09cd36f00701e9aa751724feaa2212; _bgp_session=BAh7BjoPc2Vzc2lvbl9pZEkiJTA1MzViMWYzZTYzOGM4NGJhNDI0NzI5OTc0OTVmNDcxBjoGRUY%3D--718cf0fc286695ca7ec0dda181f67c3eb14e2328' -H $'DNT: 1' -H $'Connection: close' -H $'Upgrade-Insecure-Requests: 1' -b $'c=BAgiEzUxLjE0OC4xMTUuMTc3--fe45cb679a09cd36f00701e9aa751724feaa2212; _bgp_session=BAh7BjoPc2Vzc2lvbl9pZEkiJTA1MzViMWYzZTYzOGM4NGJhNDI0NzI5OTc0OTVmNDcxBjoGRUY%3D--718cf0fc286695ca7ec0dda181f67c3eb14e2328' $'https://bgp.he.net/search?search[search]=IBM&commit=Search' | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > ibm.txt
 
 echo [+] downloading blocks for AWS from https://ip-ranges.amazonaws.com/ip-ranges.json
 curl https://ip-ranges.amazonaws.com/ip-ranges.json | grep ip_prefix | awk -F ":" '{print $2}' | sed 's/"//' | sed 's/",//' | sed "s/^[ \t]*//" > aws_ranges.txt
