@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script should be deployed on your red team infrastructure
+# This script should be deployed on your red team infrastructure to protect you from these pesky blue teams
 # Tested on Debian
 
 
