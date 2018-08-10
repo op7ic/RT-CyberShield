@@ -35,6 +35,7 @@ echo [+] Unpacking phantomjs distribution
 
 MACHINE_TYPE=`uname -m`
 if [ ${MACHINE_TYPE} == 'x86_64' ]; then
+  echo [+] unpacking phantomjs x64
   tar xvjf phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
   
   echo [+] downloading blocks for digital ocean addresses from https://bgp.he.net/search?search[search]=digitalocean&commit=Search
@@ -49,10 +50,11 @@ if [ ${MACHINE_TYPE} == 'x86_64' ]; then
   echo [+] downloading blocks for verizon addresses https://bgp.he.net/search?search%5Bsearch%5D=verizon&commit=Search
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=verizon&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > verizon.txt
   
-  echo [+] downloading blocks for verizon addresses https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search
+  echo [+] downloading blocks for cisco addresses https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > cisco.txt
   
 else
+  echo [+] unpacking phantomjs x86
   tar xvjf phantomjs/phantomjs-2.1.1-linux-i686.tar.bz2
   
   echo [+] downloading blocks for digital ocean addresses from https://bgp.he.net/search?search[search]=digitalocean&commit=Search
@@ -67,7 +69,7 @@ else
   echo [+] downloading blocks for verizon addresses https://bgp.he.net/search?search%5Bsearch%5D=verizon&commit=Search
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=verizon&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > verizon.txt
   
-  echo [+] downloading blocks for verizon addresses https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search
+  echo [+] downloading blocks for cisco addresses https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > cisco.txt
 fi
 
@@ -155,3 +157,8 @@ ipset list
 
 #toadd:
 #https://bgp.he.net/search?search%5Bsearch%5D=ovh&commit=Search
+#https://bgp.he.net/search?search%5Bsearch%5D=Barracuda&commit=Search
+#https://bgp.he.net/search?search%5Bsearch%5D=symantec&commit=Search
+#https://bgp.he.net/search?search%5Bsearch%5D=ForcePoint&commit=Search
+#https://bgp.he.net/search?search%5Bsearch%5D=Level+3+Parent&commit=Search
+#https://bgp.he.net/search?search%5Bsearch%5D=%09Palo+Alto+Networks&commit=Search
