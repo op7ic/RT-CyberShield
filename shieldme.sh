@@ -38,59 +38,71 @@ if [ ${MACHINE_TYPE} == 'x86_64' ]; then
   echo [+] unpacking phantomjs x64
   tar xvjf phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
     
-  echo [+] downloading blocks for digital ocean addresses from https://bgp.he.net/search?search[search]=digitalocean&commit=Search
+  echo [+] downloading blocks for digital ocean addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search[search]=digitalocean&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > digitalocean.txt
   
-  echo [+] downloading blocks for IBM addresses from https://bgp.he.net/search?search[search]=IBM&commit=Search
+  echo [+] downloading blocks for IBM addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search[search]=IBM&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > ibm.txt
   
-  echo [+] downloading blocks for rackspace addresses https://bgp.he.net/search?search%5Bsearch%5D=rackspace+&commit=Search
+  echo [+] downloading blocks for rackspace addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=rackspace+&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > rackspace.txt
   
-  echo [+] downloading blocks for verizon addresses https://bgp.he.net/search?search%5Bsearch%5D=verizon&commit=Search
+  echo [+] downloading blocks for verizon addresses
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=verizon&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > verizon.txt
   
-  echo [+] downloading blocks for cisco addresses https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search
+  echo [+] downloading blocks for cisco addresses
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > cisco.txt
   
-  echo [+] downloading blocks for symantec addresses https://bgp.he.net/search?search%5Bsearch%5D=symantec&commit=Search
+  echo [+] downloading blocks for symantec addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=symantec&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > symantec.txt
   
-  echo [+] downloading blocks for forcepoint addresses https://bgp.he.net/search?search%5Bsearch%5D=ForcePoint&commit=Search
+  echo [+] downloading blocks for forcepoint addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=ForcePoint&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > forcepoint.txt
   
-  echo [+] downloading blocks for paloalto addresses https://bgp.he.net/search?search%5Bsearch%5D=%09Palo+Alto+Networks&commit=Search
+  echo [+] downloading blocks for paloalto addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=%09Palo+Alto+Networks&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > paloalto.txt
   
-  echo [+] downloading blocks for paloalto addresses https://bgp.he.net/search?search%5Bsearch%5D=Barracuda&commit=Search
+  echo [+] downloading blocks for barracuda addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Barracuda&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > barracuda.txt
   
-  echo [+] downloading blocks for L3 addresses https://bgp.he.net/search?search%5Bsearch%5D=Level+3+Parent&commit=Search
+  echo [+] downloading blocks for L3 addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Level+3+Parent&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > l3.txt
   
-  echo [+] downloading blocks for avast addresses https://bgp.he.net/search?search%5Bsearch%5D=Avast&commit=Search
+  echo [+] downloading blocks for avast addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Avast&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > avast.txt
 
-  echo [+] downloading blocks for Bitdefender addresses https://bgp.he.net/search?search%5Bsearch%5D=Bitdefender&commit=Search
+  echo [+] downloading blocks for Bitdefender addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Bitdefender&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > bitdefender.txt
    
-  echo [+] downloading blocks for ESET addresses https://bgp.he.net/search?search%5Bsearch%5D=ESET&commit=Search
+  echo [+] downloading blocks for ESET addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=ESET&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > ESET.txt
   
-  echo [+] downloading blocks for fireeye addresses https://bgp.he.net/search?search%5Bsearch%5D=FireEye&commit=Search
+  echo [+] downloading blocks for fireeye addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=FireEye&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > fireeye.txt
   
-  echo [+] downloading blocks for Fortinet addresses https://bgp.he.net/search?search%5Bsearch%5D=Fortinet&commit=Search
+  echo [+] downloading blocks for Fortinet addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Fortinet&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > fortinet.txt
   
-  echo [+] downloading blocks for Kaspersky addresses https://bgp.he.net/search?search%5Bsearch%5D=Kaspersky&commit=Search
+  echo [+] downloading blocks for Kaspersky addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Kaspersky&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > kaspersky.txt
   
-  echo [+] downloading blocks for McAfee addresses https://bgp.he.net/search?search%5Bsearch%5D=McAfee&commit=Search
+  echo [+] downloading blocks for McAfee addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=McAfee&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > McAfee.txt
   
-  echo [+] downloading blocks for Sophos addresses https://bgp.he.net/search?search%5Bsearch%5D=Sophos&commit=Search
+  echo [+] downloading blocks for Sophos addresses 
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Sophos&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > Sophos.txt
+  
+  echo [+] downloading blocks for OVH addresses 
+  phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=OVH&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > OVH.txt
+  
+  echo [+] downloading blocks for WatchGuard addresses 
+  phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=WatchGuard&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > WatchGuard.txt
+  
+  echo [+] downloading blocks for Webroot addresses
+  phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Webroot&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > Webroot.txt
+  
+  echo [+] downloading blocks for Microsoft addresses 
+  phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Microsoft&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > Microsoft.txt
   
   echo [+] removing phantomjs folder
   rm -rf phantomjs-2.1.1-linux-x86_64
@@ -99,59 +111,71 @@ else
   echo [+] unpacking phantomjs x86
   tar xvjf phantomjs/phantomjs-2.1.1-linux-i686.tar.bz2
   
-  echo [+] downloading blocks for digital ocean addresses from https://bgp.he.net/search?search[search]=digitalocean&commit=Search
+  echo [+] downloading blocks for digital ocean addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search[search]=digitalocean&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > digitalocean.txt
   
-  echo [+] downloading blocks for IBM addresses from https://bgp.he.net/search?search[search]=IBM&commit=Search
+  echo [+] downloading blocks for IBM addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search[search]=IBM&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > ibm.txt
   
-  echo [+] downloading blocks for rackspace addresses https://bgp.he.net/search?search%5Bsearch%5D=rackspace+&commit=Search
+  echo [+] downloading blocks for rackspace addresses
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=rackspace+&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > rackspace.txt
   
-  echo [+] downloading blocks for verizon addresses https://bgp.he.net/search?search%5Bsearch%5D=verizon&commit=Search
+  echo [+] downloading blocks for verizon addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=verizon&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > verizon.txt
   
-  echo [+] downloading blocks for cisco addresses https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search
+  echo [+] downloading blocks for cisco addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > cisco.txt
   
-  echo [+] downloading blocks for symantec addresses https://bgp.he.net/search?search%5Bsearch%5D=symantec&commit=Search
+  echo [+] downloading blocks for symantec addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=symantec&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > symantec.txt
   
-  echo [+] downloading blocks for forcepoint addresses https://bgp.he.net/search?search%5Bsearch%5D=ForcePoint&commit=Search
+  echo [+] downloading blocks for forcepoint addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=ForcePoint&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > forcepoint.txt
   
-  echo [+] downloading blocks for paloalto addresses https://bgp.he.net/search?search%5Bsearch%5D=%09Palo+Alto+Networks&commit=Search
+  echo [+] downloading blocks for barracuda addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=%09Palo+Alto+Networks&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > paloalto.txt
   
-  echo [+] downloading blocks for paloalto addresses https://bgp.he.net/search?search%5Bsearch%5D=Barracuda&commit=Search
+  echo [+] downloading blocks for paloalto addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Barracuda&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > barracuda.txt
   
-  echo [+] downloading blocks for L3 addresses https://bgp.he.net/search?search%5Bsearch%5D=Level+3+Parent&commit=Search
+  echo [+] downloading blocks for L3 addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Level+3+Parent&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > l3.txt
   
-  echo [+] downloading blocks for avast addresses https://bgp.he.net/search?search%5Bsearch%5D=Avast&commit=Search
+  echo [+] downloading blocks for avast addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Avast&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > avast.txt
 
-  echo [+] downloading blocks for Bitdefender addresses https://bgp.he.net/search?search%5Bsearch%5D=Bitdefender&commit=Search
+  echo [+] downloading blocks for Bitdefender addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Bitdefender&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > bitdefender.txt
    
-  echo [+] downloading blocks for ESET addresses https://bgp.he.net/search?search%5Bsearch%5D=ESET&commit=Search
+  echo [+] downloading blocks for ESET addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=ESET&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > ESET.txt
   
-  echo [+] downloading blocks for fireeye addresses https://bgp.he.net/search?search%5Bsearch%5D=FireEye&commit=Search
+  echo [+] downloading blocks for fireeye addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=FireEye&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > fireeye.txt
   
-  echo [+] downloading blocks for Fortinet addresses https://bgp.he.net/search?search%5Bsearch%5D=Fortinet&commit=Search
+  echo [+] downloading blocks for Fortinet addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Fortinet&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > fortinet.txt
   
-  echo [+] downloading blocks for Kaspersky addresses https://bgp.he.net/search?search%5Bsearch%5D=Kaspersky&commit=Search
+  echo [+] downloading blocks for Kaspersky addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Kaspersky&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > kaspersky.txt
   
-  echo [+] downloading blocks for McAfee addresses https://bgp.he.net/search?search%5Bsearch%5D=McAfee&commit=Search
+  echo [+] downloading blocks for McAfee addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=McAfee&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > McAfee.txt
   
-  echo [+] downloading blocks for Sophos addresses https://bgp.he.net/search?search%5Bsearch%5D=Sophos&commit=Search
+  echo [+] downloading blocks for Sophos addresses 
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Sophos&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > Sophos.txt
+  
+  echo [+] downloading blocks for OVH addresses 
+  phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=OVH&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > OVH.txt
+  
+  echo [+] downloading blocks for WatchGuard addresses 
+  phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=WatchGuard&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > WatchGuard.txt
+  
+  echo [+] downloading blocks for Webroot addresses 
+  phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Webroot&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > Webroot.txt
+  
+  echo [+] downloading blocks for Microsoft addresses 
+  phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Microsoft&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > Microsoft.txt
   
   echo [+] removing phantomjs folder
   rm -rf phantomjs-2.1.1-linux-i686
@@ -274,6 +298,23 @@ ipset create McAfee hash:net
 while read line; do ipset add McAfee $line; done < McAfee.txt
 iptables -I INPUT -m set --match-set McAfee src -j DROP
 
+ipset create OVH hash:net
+while read line; do ipset add OVH $line; done < OVH.txt
+iptables -I INPUT -m set --match-set OVH src -j DROP
+
+ipset create WatchGuard hash:net
+while read line; do ipset add WatchGuard $line; done < WatchGuard.txt
+iptables -I INPUT -m set --match-set WatchGuard src -j DROP
+
+ipset create Webroot hash:net
+while read line; do ipset add Webroot $line; done < Webroot.txt
+iptables -I INPUT -m set --match-set Webroot src -j DROP
+
+ipset create Microsoft hash:net
+while read line; do ipset add Microsoft $line; done < Microsoft.txt
+iptables -I INPUT -m set --match-set Microsoft src -j DROP
+
+
 echo [+] removing block lists
 rm -f tor_current_nodes.txt
 rm -f tor_current_nodes_torlist.txt
@@ -299,6 +340,10 @@ rm -f kaspersky.txt
 rm -f ESET.txt
 rm -f McAfee.txt
 rm -f Sophos.txt
+rm -f OVH.txt
+rm -f WatchGuard.txt
+rm -f Webroot.txt
+rm -f Microsoft.txt
 
 echo [+] removing phantomjs script
 rm -f 7.js
@@ -308,5 +353,3 @@ ipset save > /etc/ipset.conf
 
 echo [+] Here is your full block list:
 ipset list > blockedranges.txt
-
-
