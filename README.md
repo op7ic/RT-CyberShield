@@ -142,3 +142,4 @@ iptables -I INPUT -m set --match-set Microsoft src -j DROP
 - This script relies heavily on https://bgp.he.net portal.
 - If you have VPS-To-VPS communication (i.e. Cobalt Strike to Fronting Server on OVH) the range might get blocked. Be careful where/how you set this script up or comment out specific ranges from config file
 - The script relies on precomipled version of phantomjs
+- Need some "for" loops in there. Its very crude script for now.
