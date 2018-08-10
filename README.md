@@ -138,4 +138,5 @@ iptables -I INPUT -m set --match-set Microsoft src -j DROP
 
 ## Limitations
 
-ipset doesn't like ipv6 ranges ...
+- ipset doesn't like ipv6 ranges ...
+- this script relies heavily on https://bgp.he.net portal. It would be good to find alternatives.
