@@ -140,3 +140,4 @@ iptables -I INPUT -m set --match-set Microsoft src -j DROP
 
 - Ipset doesn't like ipv6 ranges
 - This script relies heavily on https://bgp.he.net portal. It would be good to find alternatives.
+- If you have VPS-To-VPS communication (i.e. Cobalt Strike to Fronting Server on OVH) the range might get blocked. Be careful where/how you set this script up or comment out specific ranges from config file
