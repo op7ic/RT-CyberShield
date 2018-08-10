@@ -100,7 +100,7 @@ If you for some reason want to ban all IP addresses from a certain country, have
 
 ## I don't want to run this script
 
-That's fine. IP blocks don't change that often so just copy [ipset.conf](ipset-set/ipset.conf) to your local copy like this: 
+That's fine. IP blocks don't change that often so just copy [ipset.conf](ipset-set/ipset.conf) to your local copy: 
 ```
 cp ipset-set/ipset.conf /etc/ipset.conf
 ```
