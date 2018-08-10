@@ -4,7 +4,7 @@ RT-CyberShield
 Protecting Red Team infrastructure with red cyber shield. This simple bash script will block known ranges for cloud providers and some security vendors.
 
 ## Prerequisites for Debian/Ubuntu based installations
-The script will aim to setup everything for you including installation of appropriate libraries so phantomjs can work and pull all the ip blocks from "bgp.he.net". It can also be done manually however:
+The script will aim to setup everything for you including installation of appropriate libraries so phantomjs can work and pull all the ip blocks from "bgp.he.net". However this can be done manually too:
  
 ```
 apt-get install -y ipset iptables curl fontconfig libfontconfig
@@ -135,3 +135,7 @@ iptables -I INPUT -m set --match-set WatchGuard src -j DROP
 iptables -I INPUT -m set --match-set Webroot src -j DROP
 iptables -I INPUT -m set --match-set Microsoft src -j DROP
 ```
+
+## Limitations
+
+ipset doesn't like ipv6 ranges ...
