@@ -242,6 +242,38 @@ ipset create l3 hash:net
 while read line; do ipset add l3 $line; done < l3.txt
 iptables -I INPUT -m set --match-set l3 src -j DROP
 
+ipset create avast hash:net
+while read line; do ipset add avast $line; done < avast.txt
+iptables -I INPUT -m set --match-set avast src -j DROP
+
+ipset create bitdefender hash:net
+while read line; do ipset add bitdefender $line; done < bitdefender.txt
+iptables -I INPUT -m set --match-set bitdefender src -j DROP
+
+ipset create fireeye hash:net
+while read line; do ipset add fireeye $line; done < fireeye.txt
+iptables -I INPUT -m set --match-set fireeye src -j DROP
+
+ipset create fortinet hash:net
+while read line; do ipset add fortinet $line; done < fortinet.txt
+iptables -I INPUT -m set --match-set fortinet src -j DROP
+
+ipset create kaspersky hash:net
+while read line; do ipset add kaspersky $line; done < kaspersky.txt
+iptables -I INPUT -m set --match-set kaspersky src -j DROP
+
+ipset create ESET hash:net
+while read line; do ipset add ESET $line; done < ESET.txt
+iptables -I INPUT -m set --match-set ESET src -j DROP
+
+ipset create Sophos hash:net
+while read line; do ipset add Sophos $line; done < Sophos.txt
+iptables -I INPUT -m set --match-set Sophos src -j DROP
+
+ipset create McAfee hash:net
+while read line; do ipset add McAfee $line; done < McAfee.txt
+iptables -I INPUT -m set --match-set McAfee src -j DROP
+
 echo [+] removing block lists
 rm -f tor_current_nodes.txt
 rm -f tor_current_nodes_torlist.txt
