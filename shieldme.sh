@@ -89,7 +89,6 @@ curl https://www.cloudflare.com/ips-v4 > cloudflare-ip4.txt
 echo [+] downloading blocks for cloudflare (ipv6) from https://www.cloudflare.com/ips-v6
 curl https://www.cloudflare.com/ips-v6 > cloudflare-ip6.txt
 
-
 echo [+] setting up to list blocks
 
 ipset create tor-individual-ip1 hash:ip
@@ -123,6 +122,18 @@ iptables -I INPUT -m set --match-set cloudflare4 src -j DROP
 ipset create cloudflare6 hash:net
 while read line; do ipset add cloudflare6 $line; done < cloudflare-ip6.txt
 iptables -I INPUT -m set --match-set cloudflare6 src -j DROP
+
+ipset create cisco hash:net
+while read line; do ipset add cisco $line; done < cisco.txt
+iptables -I INPUT -m set --match-set cisco src -j DROP
+
+ipset create verizon hash:net
+while read line; do ipset add verizon $line; done < verizon.txt
+iptables -I INPUT -m set --match-set verizon src -j DROP
+
+ipset create rackspace hash:net
+while read line; do ipset add rackspace $line; done < rackspace.txt
+iptables -I INPUT -m set --match-set rackspace src -j DROP
 
 rm -f tor_current_nodes.txt
 rm -f tor_current_nodes_torlist.txt
