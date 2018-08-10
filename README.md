@@ -65,32 +65,37 @@ iptables -L INPUT -v --line-numbers
 The table should look similar to this: 
 
 ```
-Chain INPUT (policy ACCEPT 835 packets, 59380 bytes)
+Chain INPUT (policy ACCEPT 69 packets, 4328 bytes)
 num   pkts bytes target     prot opt in     out     source               destination
-1        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set McAfee src
-2        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set Sophos src
-3        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set ESET src
-4        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set kaspersky src
-5        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set fortinet src
-6        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set fireeye src
-7        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set bitdefender src
-8        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set avast src
-9        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set l3 src
-10       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set barracuda src
-11       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set paloalto src
-12       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set forcepoint src
-13       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set symantec src
-14       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set rackspace src
-15       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set verizon src
-16       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set cisco src
-17       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set cloudflare6 src
-18       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set cloudflare4 src
-19       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set azure src
-20      19  1348 DROP       all  --  any    any     anywhere             anywhere             match-set digitalocean src
-21       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set ibm src
-22      51  4284 DROP       all  --  any    any     anywhere             anywhere             match-set aws src
-23       7   532 DROP       all  --  any    any     anywhere             anywhere             match-set tor-individual-ip2 src
-24       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set tor-individual-ip1 src
+1        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set Microsoft src
+2        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set Webroot src
+3        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set WatchGuard src
+4        8   480 DROP       all  --  any    any     anywhere             anywhere             match-set OVH src
+5        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set McAfee src
+6        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set Sophos src
+7        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set ESET src
+8        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set kaspersky src
+9        0     0 DROP       all  --  any    any     anywhere             anywhere             match-set fortinet src
+10       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set fireeye src
+11       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set bitdefender src
+12       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set avast src
+13       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set l3 src
+14       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set barracuda src
+15       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set paloalto src
+16       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set forcepoint src
+17       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set symantec src
+18       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set rackspace src
+19       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set verizon src
+20       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set cisco src
+21       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set cloudflare6 src
+22       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set cloudflare4 src
+23       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set azure src
+24       1    76 DROP       all  --  any    any     anywhere             anywhere             match-set digitalocean src
+25       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set ibm src
+26       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set aws src
+27       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set tor-individual-ip2 src
+28       0     0 DROP       all  --  any    any     anywhere             anywhere             match-set tor-individual-ip1 src
+
 ```
 
 ## Modify the blacklists you want to use
