@@ -351,7 +351,7 @@ rm -f 7.js
 echo [+] saving full output
 ipset save > /etc/ipset.conf
 
-echo [+] Here is your full block list:
+echo [+] Full list of blocked ranges is in blockedranges.txt
 ipset list > blockedranges.txt
 
 #No this script is not smart ... you could do loops but hey ho
