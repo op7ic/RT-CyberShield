@@ -104,3 +104,34 @@ That's fine. IP blocks don't change that often so just copy [ipset.conf](ipset-s
 ```
 cp ipset-set/ipset.conf /etc/ipset.conf
 ```
+You will then need to run following commands to ensure that ranges are dropped via iptables: 
+```
+iptables -I INPUT -m set --match-set tor-individual-ip1 src -j DROP
+iptables -I INPUT -m set --match-set tor-individual-ip2 src -j DROP
+iptables -I INPUT -m set --match-set aws src -j DROP
+iptables -I INPUT -m set --match-set ibm src -j DROP
+iptables -I INPUT -m set --match-set digitalocean src -j DROP
+iptables -I INPUT -m set --match-set azure src -j DROP
+iptables -I INPUT -m set --match-set cloudflare4 src -j DROP
+iptables -I INPUT -m set --match-set cloudflare6 src -j DROP
+iptables -I INPUT -m set --match-set cisco src -j DROP
+iptables -I INPUT -m set --match-set verizon src -j DROP
+iptables -I INPUT -m set --match-set rackspace src -j DROP
+iptables -I INPUT -m set --match-set symantec src -j DROP
+iptables -I INPUT -m set --match-set forcepoint src -j DROP
+iptables -I INPUT -m set --match-set paloalto src -j DROP
+iptables -I INPUT -m set --match-set barracuda src -j DROP
+iptables -I INPUT -m set --match-set l3 src -j DROP
+iptables -I INPUT -m set --match-set avast src -j DROP
+iptables -I INPUT -m set --match-set bitdefender src -j DROP
+iptables -I INPUT -m set --match-set fireeye src -j DROP
+iptables -I INPUT -m set --match-set fortinet src -j DROP
+iptables -I INPUT -m set --match-set kaspersky src -j DROP
+iptables -I INPUT -m set --match-set ESET src -j DROP
+iptables -I INPUT -m set --match-set Sophos src -j DROP
+iptables -I INPUT -m set --match-set McAfee src -j DROP
+iptables -I INPUT -m set --match-set OVH src -j DROP
+iptables -I INPUT -m set --match-set WatchGuard src -j DROP
+iptables -I INPUT -m set --match-set Webroot src -j DROP
+iptables -I INPUT -m set --match-set Microsoft src -j DROP
+```

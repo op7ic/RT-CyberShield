@@ -353,3 +353,5 @@ ipset save > /etc/ipset.conf
 
 echo [+] Here is your full block list:
 ipset list > blockedranges.txt
+
+#No this script is not smart ... you could do loops but hey ho
