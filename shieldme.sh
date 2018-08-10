@@ -69,7 +69,6 @@ else
   
   echo [+] downloading blocks for verizon addresses https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > cisco.txt
-  
 fi
 
 echo [+] downloading IPs for current tor exit node addresses from https://check.torproject.org/exit-addresses
@@ -135,6 +134,7 @@ rm -f cloudflare-ip6.txt
 rm -f cloudflare-ip4.txt
 rm -f rackspace.txt
 rm -f verizon.txt
+rm -f cisco.txt
 
 echo [+] saving full output
 ipset save > /etc/ipset.conf
@@ -143,5 +143,4 @@ echo [+] Here is your full block list:
 ipset list
 
 #toadd:
-#https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search
 #https://bgp.he.net/search?search%5Bsearch%5D=ovh&commit=Search
