@@ -1,6 +1,7 @@
 #!/bin/bash
 # This script should be deployed on your red team infrastructure to protect you from these pesky blue teams
-# Tested on Debian
+# Tested on Debian.
+# author: op7ic
 
 
 if [ -f /etc/redhat-release ]; then
@@ -31,13 +32,12 @@ page.open(url, function(status) {
 });
 EOF
 
-echo [+] Unpacking phantomjs distribution
 
 MACHINE_TYPE=`uname -m`
 if [ ${MACHINE_TYPE} == 'x86_64' ]; then
   echo [+] unpacking phantomjs x64
   tar xvjf phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
-  
+    
   echo [+] downloading blocks for digital ocean addresses from https://bgp.he.net/search?search[search]=digitalocean&commit=Search
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search[search]=digitalocean&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > digitalocean.txt
   
@@ -70,6 +70,7 @@ if [ ${MACHINE_TYPE} == 'x86_64' ]; then
   
   echo [+] removing phantomjs folder
   rm -rf phantomjs-2.1.1-linux-x86_64
+  
 else
   echo [+] unpacking phantomjs x86
   tar xvjf phantomjs/phantomjs-2.1.1-linux-i686.tar.bz2
@@ -107,7 +108,6 @@ else
   echo [+] removing phantomjs folder
   rm -rf phantomjs-2.1.1-linux-i686
 fi
-
 
 echo [+] downloading IPs for current tor exit node addresses from https://check.torproject.org/exit-addresses
 curl https://check.torproject.org/exit-addresses | grep ExitAddress | awk '{print $2}' | sort | uniq > tor_current_nodes.txt
@@ -215,7 +215,4 @@ echo [+] saving full output
 ipset save > /etc/ipset.conf
 
 echo [+] Here is your full block list:
-ipset list
-
-#toadd:
-#https://bgp.he.net/search?search%5Bsearch%5D=ovh&commit=Search
+ipset list > blockedranges.txt
