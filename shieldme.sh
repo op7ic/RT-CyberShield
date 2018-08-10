@@ -53,6 +53,21 @@ if [ ${MACHINE_TYPE} == 'x86_64' ]; then
   echo [+] downloading blocks for cisco addresses https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > cisco.txt
   
+  echo [+] downloading blocks for symantec addresses https://bgp.he.net/search?search%5Bsearch%5D=symantec&commit=Search
+  phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=symantec&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > symantec.txt
+  
+  echo [+] downloading blocks for forcepoint addresses https://bgp.he.net/search?search%5Bsearch%5D=ForcePoint&commit=Search
+  phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=ForcePoint&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > forcepoint.txt
+  
+  echo [+] downloading blocks for paloalto addresses https://bgp.he.net/search?search%5Bsearch%5D=%09Palo+Alto+Networks&commit=Search
+  phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=%09Palo+Alto+Networks&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > paloalto.txt
+  
+  echo [+] downloading blocks for paloalto addresses https://bgp.he.net/search?search%5Bsearch%5D=Barracuda&commit=Search
+  phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Barracuda&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > barracuda.txt
+  
+  echo [+] downloading blocks for L3 addresses https://bgp.he.net/search?search%5Bsearch%5D=Level+3+Parent&commit=Search
+  phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Level+3+Parent&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > l3.txt
+  
 else
   echo [+] unpacking phantomjs x86
   tar xvjf phantomjs/phantomjs-2.1.1-linux-i686.tar.bz2
@@ -71,7 +86,24 @@ else
   
   echo [+] downloading blocks for cisco addresses https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=cisco&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > cisco.txt
+  
+  echo [+] downloading blocks for symantec addresses https://bgp.he.net/search?search%5Bsearch%5D=symantec&commit=Search
+  phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=symantec&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > symantec.txt
+  
+  echo [+] downloading blocks for forcepoint addresses https://bgp.he.net/search?search%5Bsearch%5D=ForcePoint&commit=Search
+  phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=ForcePoint&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > forcepoint.txt
+  
+  echo [+] downloading blocks for paloalto addresses https://bgp.he.net/search?search%5Bsearch%5D=%09Palo+Alto+Networks&commit=Search
+  phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=%09Palo+Alto+Networks&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > paloalto.txt
+  
+  echo [+] downloading blocks for paloalto addresses https://bgp.he.net/search?search%5Bsearch%5D=Barracuda&commit=Search
+  phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Barracuda&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > barracuda.txt
+  
+  echo [+] downloading blocks for L3 addresses https://bgp.he.net/search?search%5Bsearch%5D=Level+3+Parent&commit=Search
+  phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Level+3+Parent&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > l3.txt
+  
 fi
+
 
 echo [+] downloading IPs for current tor exit node addresses from https://check.torproject.org/exit-addresses
 curl https://check.torproject.org/exit-addresses | grep ExitAddress | awk '{print $2}' | sort | uniq > tor_current_nodes.txt
@@ -137,6 +169,26 @@ ipset create rackspace hash:net
 while read line; do ipset add rackspace $line; done < rackspace.txt
 iptables -I INPUT -m set --match-set rackspace src -j DROP
 
+ipset create symantec hash:net
+while read line; do ipset add symantec $line; done < symantec.txt
+iptables -I INPUT -m set --match-set symantec src -j DROP
+
+ipset create forcepoint hash:net
+while read line; do ipset add forcepoint $line; done < forcepoint.txt
+iptables -I INPUT -m set --match-set forcepoint src -j DROP
+
+ipset create paloalto hash:net
+while read line; do ipset add paloalto $line; done < paloalto.txt
+iptables -I INPUT -m set --match-set paloalto src -j DROP
+
+ipset create barracuda hash:net
+while read line; do ipset add barracuda $line; done < barracuda.txt
+iptables -I INPUT -m set --match-set barracuda src -j DROP
+
+ipset create l3 hash:net
+while read line; do ipset add l3 $line; done < l3.txt
+iptables -I INPUT -m set --match-set l3 src -j DROP
+
 rm -f tor_current_nodes.txt
 rm -f tor_current_nodes_torlist.txt
 rm -f aws_ranges.txt
@@ -148,6 +200,11 @@ rm -f cloudflare-ip4.txt
 rm -f rackspace.txt
 rm -f verizon.txt
 rm -f cisco.txt
+rm -f symantec.txt
+rm -f forcepoint.txt
+rm -f paloalto.txt
+rm -f barracuda.txt
+rm -f l3.txt
 
 echo [+] saving full output
 ipset save > /etc/ipset.conf
@@ -157,8 +214,3 @@ ipset list
 
 #toadd:
 #https://bgp.he.net/search?search%5Bsearch%5D=ovh&commit=Search
-#https://bgp.he.net/search?search%5Bsearch%5D=Barracuda&commit=Search
-#https://bgp.he.net/search?search%5Bsearch%5D=symantec&commit=Search
-#https://bgp.he.net/search?search%5Bsearch%5D=ForcePoint&commit=Search
-#https://bgp.he.net/search?search%5Bsearch%5D=Level+3+Parent&commit=Search
-#https://bgp.he.net/search?search%5Bsearch%5D=%09Palo+Alto+Networks&commit=Search
