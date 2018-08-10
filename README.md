@@ -34,10 +34,18 @@ The following providers/IP ranges are currently blocked:
 - TOR exit nodes
 - Azure
 - Cloudflare
+- Avast
+- Bitdefender
+- Fireeye
+- Fortinet
+- Kaspersky
+- ESET
+- McAfee
+- Sophos
 
 ## Cron job
 
-In order to auto-update the blocks, copy the following code into /etc/cron.d/update-cybershield. Don't update the list too often or some blacklist providers will ban your IP address. Once a week should be sufficient. 
+In order to auto-update the blocks, copy the following code into /etc/cron.d/update-cybershield. Don't update the list too often or some providers will ban your IP address. Once a week should be sufficient. 
 ```
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=root
@@ -45,7 +53,7 @@ MAILTO=root
 ```
 
 ## Check for dropped packets
-Using iptables, you can check how many packets got dropped using the blacklist:
+Using iptables, you can check how many packets got dropped using the filters:
 ```
 iptables -L INPUT -v --line-numbers
 ```
