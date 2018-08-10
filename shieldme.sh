@@ -68,6 +68,8 @@ if [ ${MACHINE_TYPE} == 'x86_64' ]; then
   echo [+] downloading blocks for L3 addresses https://bgp.he.net/search?search%5Bsearch%5D=Level+3+Parent&commit=Search
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Level+3+Parent&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > l3.txt
   
+  echo [+] removing phantomjs folder
+  rm -rf phantomjs-2.1.1-linux-x86_64
 else
   echo [+] unpacking phantomjs x86
   tar xvjf phantomjs/phantomjs-2.1.1-linux-i686.tar.bz2
@@ -102,6 +104,8 @@ else
   echo [+] downloading blocks for L3 addresses https://bgp.he.net/search?search%5Bsearch%5D=Level+3+Parent&commit=Search
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Level+3+Parent&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > l3.txt
   
+  echo [+] removing phantomjs folder
+  rm -rf phantomjs-2.1.1-linux-i686
 fi
 
 
@@ -117,10 +121,10 @@ curl https://ip-ranges.amazonaws.com/ip-ranges.json | grep ip_prefix | awk -F ":
 echo [+] downloading blocks for azure from https://download.microsoft.com/download/0/1/8/018E208D-54F8-44CD-AA26-CD7BC9524A8C/PublicIPs_20180806.xml
 curl https://download.microsoft.com/download/0/1/8/018E208D-54F8-44CD-AA26-CD7BC9524A8C/PublicIPs_20180806.xml | awk -F "Subnet=" '{print $2}' | sed 's/"//' | sed 's/",//' | sed "s/^[ \t]*//" | sed 's/"//' | sed 's/\/>//' > azure.txt
 
-echo [+] downloading blocks for cloudflare (ipv4) from https://www.cloudflare.com/ips-v4
+echo [+] downloading blocks for cloudflare ipv4 from https://www.cloudflare.com/ips-v4
 curl https://www.cloudflare.com/ips-v4 > cloudflare-ip4.txt
 
-echo [+] downloading blocks for cloudflare (ipv6) from https://www.cloudflare.com/ips-v6
+echo [+] downloading blocks for cloudflare ipv6 from https://www.cloudflare.com/ips-v6
 curl https://www.cloudflare.com/ips-v6 > cloudflare-ip6.txt
 
 echo [+] setting up to list blocks
@@ -205,6 +209,7 @@ rm -f forcepoint.txt
 rm -f paloalto.txt
 rm -f barracuda.txt
 rm -f l3.txt
+rm -f 7.js
 
 echo [+] saving full output
 ipset save > /etc/ipset.conf
