@@ -83,13 +83,13 @@ if [ ${MACHINE_TYPE} == 'x86_64' ]; then
   echo [+] downloading blocks for Fortinet addresses https://bgp.he.net/search?search%5Bsearch%5D=Fortinet&commit=Search
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Fortinet&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > fortinet.txt
   
-  echo [+] downloading blocks for avast addresses https://bgp.he.net/search?search%5Bsearch%5D=Kaspersky&commit=Search
+  echo [+] downloading blocks for Kaspersky addresses https://bgp.he.net/search?search%5Bsearch%5D=Kaspersky&commit=Search
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Kaspersky&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > kaspersky.txt
   
-  echo [+] downloading blocks for avast addresses https://bgp.he.net/search?search%5Bsearch%5D=McAfee&commit=Search
+  echo [+] downloading blocks for McAfee addresses https://bgp.he.net/search?search%5Bsearch%5D=McAfee&commit=Search
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=McAfee&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > McAfee.txt
   
-  echo [+] downloading blocks for avast addresses https://bgp.he.net/search?search%5Bsearch%5D=Sophos&commit=Search
+  echo [+] downloading blocks for Sophos addresses https://bgp.he.net/search?search%5Bsearch%5D=Sophos&commit=Search
   phantomjs-2.1.1-linux-x86_64/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Sophos&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > Sophos.txt
   
   echo [+] removing phantomjs folder
@@ -144,13 +144,13 @@ else
   echo [+] downloading blocks for Fortinet addresses https://bgp.he.net/search?search%5Bsearch%5D=Fortinet&commit=Search
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Fortinet&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > fortinet.txt
   
-  echo [+] downloading blocks for avast addresses https://bgp.he.net/search?search%5Bsearch%5D=Kaspersky&commit=Search
+  echo [+] downloading blocks for Kaspersky addresses https://bgp.he.net/search?search%5Bsearch%5D=Kaspersky&commit=Search
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Kaspersky&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > kaspersky.txt
   
-  echo [+] downloading blocks for avast addresses https://bgp.he.net/search?search%5Bsearch%5D=McAfee&commit=Search
+  echo [+] downloading blocks for McAfee addresses https://bgp.he.net/search?search%5Bsearch%5D=McAfee&commit=Search
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=McAfee&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > McAfee.txt
   
-  echo [+] downloading blocks for avast addresses https://bgp.he.net/search?search%5Bsearch%5D=Sophos&commit=Search
+  echo [+] downloading blocks for Sophos addresses https://bgp.he.net/search?search%5Bsearch%5D=Sophos&commit=Search
   phantomjs-2.1.1-linux-i686/bin/phantomjs 7.js "https://bgp.he.net/search?search%5Bsearch%5D=Sophos&commit=Search" | grep "a href" | grep -v "AS" | grep net | awk -F ">" '{print $3}' | awk -F "<" '{print $1}' | grep "/" > Sophos.txt
   
   echo [+] removing phantomjs folder
