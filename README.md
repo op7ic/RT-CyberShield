@@ -100,7 +100,7 @@ If you for some reason want to ban all IP addresses from a certain country, have
 
 ## I don't want to run this script
 
-That's fine. IP blocks don't change that often so just copy [ipset.conf](ipset-config/ipset.conf) to your local copy: 
+IP blocks do not change that often so just copy [ipset.conf](ipset-config/ipset.conf) to your local copy: 
 ```
 cp ipset-config/ipset.conf /etc/ipset.conf
 ```
@@ -138,6 +138,6 @@ iptables -I INPUT -m set --match-set Microsoft src -j DROP
 
 ## Limitations
 
-- Ipset doesn't like ipv6 ranges
-- This script relies heavily on https://bgp.he.net portal. It would be good to find alternatives.
+- Ipset doesn't like ipv6 ranges (WIP)
+- This script relies heavily on https://bgp.he.net portal.
 - If you have VPS-To-VPS communication (i.e. Cobalt Strike to Fronting Server on OVH) the range might get blocked. Be careful where/how you set this script up or comment out specific ranges from config file
