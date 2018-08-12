@@ -55,6 +55,7 @@ array[OVH]="https://bgp.he.net/search?search%5Bsearch%5D=OVH&commit=Search"
 array[WatchGuard]="https://bgp.he.net/search?search%5Bsearch%5D=WatchGuard&commit=Search"
 array[Webroot]="https://bgp.he.net/search?search%5Bsearch%5D=Webroot&commit=Search"
 array[Microsoft]="https://bgp.he.net/search?search%5Bsearch%5D=Microsoft&commit=Search"
+array[splunk]="https://bgp.he.net/search?search%5Bsearch%5D=splunk&commit=Search"
 
 
 MACHINE_TYPE=`uname -m`
@@ -219,6 +220,10 @@ ipset create Microsoft hash:net
 while read line; do ipset add Microsoft $line; done < Microsoft.txt
 iptables -I INPUT -m set --match-set Microsoft src -j DROP
 
+ipset create Splunk hash:net
+while read line; do ipset add Microsoft $line; done < splunk.txt
+iptables -I INPUT -m set --match-set Microsoft src -j DROP
+
 
 echo [+] removing block lists
 rm -f tor_current_nodes.txt
@@ -249,6 +254,7 @@ rm -f OVH.txt
 rm -f WatchGuard.txt
 rm -f Webroot.txt
 rm -f Microsoft.txt
+rm -f splunk.txt
 
 echo [+] removing phantomjs script
 rm -f 7.js
