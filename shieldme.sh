@@ -64,6 +64,7 @@ array[accenture]="https://bgp.he.net/search?search%5Bsearch%5D=accenture&commit=
 array[kpmg]="https://bgp.he.net/search?search%5Bsearch%5D=kpmg&commit=Search"
 array[bae]="https://bgp.he.net/search?search[search]=bae&commit=Search"
 array[fsecure]="https://bgp.he.net/search?search%5Bsearch%5D=%22F-Secure%22&commit=Search"
+array[trendmicro]="https://bgp.he.net/search?search%5Bsearch%5D=%22Trend+Micro%22&commit=Search"
 
 MACHINE_TYPE=`uname -m`
 if [ ${MACHINE_TYPE} == 'x86_64' ]; then
@@ -263,6 +264,12 @@ ipset create fsecure hash:net
 while read line; do ipset add fsecure $line; done < fsecure.txt
 iptables -I INPUT -m set --match-set fsecure src -j DROP
 
+ipset create trendmicro hash:net
+while read line; do ipset add trendmicro $line; done < trendmicro.txt
+iptables -I INPUT -m set --match-set trendmicro src -j DROP
+
+
+
 
 
 echo [+] removing block lists
@@ -303,6 +310,7 @@ rm -f accenture.txt
 rm -f kpmg.txt
 rm -f bae.txt
 rm -f fsecure.txt
+rm -f trendmicro.txt
 
 echo [+] removing phantomjs script
 rm -f 7.js

@@ -62,6 +62,7 @@ The following providers/IP ranges are currently blocked:
 - KPMG
 - BAE Systems
 - F-Secure
+- Trend Micro
 
 ## CRON job
 
