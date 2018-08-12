@@ -56,6 +56,7 @@ array[WatchGuard]="https://bgp.he.net/search?search%5Bsearch%5D=WatchGuard&commi
 array[Webroot]="https://bgp.he.net/search?search%5Bsearch%5D=Webroot&commit=Search"
 array[Microsoft]="https://bgp.he.net/search?search%5Bsearch%5D=Microsoft&commit=Search"
 array[splunk]="https://bgp.he.net/search?search%5Bsearch%5D=splunk&commit=Search"
+array[rapid7]="https://bgp.he.net/search?search%5Bsearch%5D=rapid7&commit=Search"
 
 
 MACHINE_TYPE=`uname -m`
@@ -224,6 +225,10 @@ ipset create Splunk hash:net
 while read line; do ipset add Microsoft $line; done < splunk.txt
 iptables -I INPUT -m set --match-set Microsoft src -j DROP
 
+ipset create Rapid7 hash:net
+while read line; do ipset add Microsoft $line; done < rapid7.txt
+iptables -I INPUT -m set --match-set Microsoft src -j DROP
+
 
 echo [+] removing block lists
 rm -f tor_current_nodes.txt
@@ -255,6 +260,7 @@ rm -f WatchGuard.txt
 rm -f Webroot.txt
 rm -f Microsoft.txt
 rm -f splunk.txt
+rm -f rapid7.txt
 
 echo [+] removing phantomjs script
 rm -f 7.js

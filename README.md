@@ -53,6 +53,8 @@ The following providers/IP ranges are currently blocked:
 - WatchGuard
 - Webroot
 - Microsoft
+- Rapid7
+- Splunk
 
 ## CRON job
 
