@@ -34,7 +34,7 @@ EOF
 
 declare -A array
 array[digitalocean]="https://bgp.he.net/search?search[search]=digitalocean&commit=Search"
-array[symantec]="https://bgp.he.net/search?search[search]=IBM&commit=Search"
+array[symantec]="https://bgp.he.net/search?search[search]=symantec&commit=Search"
 array[ibm]="https://bgp.he.net/search?search[search]=IBM&commit=Search"
 array[rackspace]="https://bgp.he.net/search?search%5Bsearch%5D=rackspace+&commit=Search"
 array[verizon]="https://bgp.he.net/search?search%5Bsearch%5D=verizon&commit=Search"
