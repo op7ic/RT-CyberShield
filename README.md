@@ -4,12 +4,14 @@ RT-CyberShield
 Protecting Red Team infrastructure with red cyber shield. This simple bash script will block known ranges for cloud providers and some security vendors.
 
 ## Prerequisites for Debian/Ubuntu based installations
+The script will execute the following to get all the packages installed:
 ```
 apt-get -y update
 apt-get install -y ipset iptables curl fontconfig libfontconfig
 ```
 
 ## Prerequisites for Red Hat/Centos based installations
+The script will execute the following to get all the packages installed:
 ```
 yum -y update
 yum -y install ipset iptables curl fontconfig libfontconfig bzip2
