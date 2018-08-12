@@ -61,6 +61,7 @@ array[raytheon]="https://bgp.he.net/search?search%5Bsearch%5D=Raytheon&commit=Se
 array[mimecast]="https://bgp.he.net/search?search%5Bsearch%5D=Mimecast+&commit=Search"
 array[lockheed]="https://bgp.he.net/search?search%5Bsearch%5D=Lockheed&commit=Search"
 array[accenture]="https://bgp.he.net/search?search%5Bsearch%5D=accenture&commit=Search"
+array[kpmg]="https://bgp.he.net/search?search%5Bsearch%5D=kpmg&commit=Search"
 
 MACHINE_TYPE=`uname -m`
 if [ ${MACHINE_TYPE} == 'x86_64' ]; then
@@ -248,6 +249,10 @@ ipset create accenture hash:net
 while read line; do ipset add accenture $line; done < accenture.txt
 iptables -I INPUT -m set --match-set accenture src -j DROP
 
+ipset create kpmg hash:net
+while read line; do ipset add kpmg $line; done < kpmg.txt
+iptables -I INPUT -m set --match-set kpmg src -j DROP
+
 echo [+] removing block lists
 rm -f tor_current_nodes.txt
 rm -f tor_current_nodes_torlist.txt
@@ -283,6 +288,7 @@ rm -f raytheon.txt
 rm -f mimecast.txt
 rm -f lockheed.txt
 rm -f accenture.txt
+rm -f kpmg.txt
 
 echo [+] removing phantomjs script
 rm -f 7.js

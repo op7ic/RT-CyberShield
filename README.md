@@ -59,6 +59,7 @@ The following providers/IP ranges are currently blocked:
 - Mimecast
 - Lockheed Martin
 - Accenture
+- KPMG
 
 ## CRON job
 
