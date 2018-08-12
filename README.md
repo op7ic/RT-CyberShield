@@ -63,6 +63,7 @@ The following providers/IP ranges are currently blocked:
 - BAE Systems
 - F-Secure
 - Trend Micro
+- NCC
 
 ## CRON job
 
