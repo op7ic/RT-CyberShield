@@ -57,7 +57,9 @@ array[Webroot]="https://bgp.he.net/search?search%5Bsearch%5D=Webroot&commit=Sear
 array[Microsoft]="https://bgp.he.net/search?search%5Bsearch%5D=Microsoft&commit=Search"
 array[splunk]="https://bgp.he.net/search?search%5Bsearch%5D=splunk&commit=Search"
 array[rapid7]="https://bgp.he.net/search?search%5Bsearch%5D=rapid7&commit=Search"
-
+array[raytheon]="https://bgp.he.net/search?search%5Bsearch%5D=Raytheon&commit=Search"
+array[mimecast]="https://bgp.he.net/search?search%5Bsearch%5D=Mimecast+&commit=Search"
+array[lockheed]="https://bgp.he.net/search?search%5Bsearch%5D=Lockheed&commit=Search"
 
 MACHINE_TYPE=`uname -m`
 if [ ${MACHINE_TYPE} == 'x86_64' ]; then
@@ -222,12 +224,26 @@ while read line; do ipset add Microsoft $line; done < Microsoft.txt
 iptables -I INPUT -m set --match-set Microsoft src -j DROP
 
 ipset create Splunk hash:net
-while read line; do ipset add Microsoft $line; done < splunk.txt
-iptables -I INPUT -m set --match-set Microsoft src -j DROP
+while read line; do ipset add Splunk $line; done < splunk.txt
+iptables -I INPUT -m set --match-set Splunk src -j DROP
 
 ipset create Rapid7 hash:net
-while read line; do ipset add Microsoft $line; done < rapid7.txt
-iptables -I INPUT -m set --match-set Microsoft src -j DROP
+while read line; do ipset add Rapid7 $line; done < rapid7.txt
+iptables -I INPUT -m set --match-set Rapid7 src -j DROP
+
+ipset create raytheon hash:net
+while read line; do ipset add raytheon $line; done < raytheon.txt
+iptables -I INPUT -m set --match-set raytheon src -j DROP
+
+ipset create mimecast hash:net
+while read line; do ipset add mimecast $line; done < mimecast.txt
+iptables -I INPUT -m set --match-set mimecast src -j DROP
+
+ipset create lockheed hash:net
+while read line; do ipset add lockheed $line; done < mimecast.txt
+iptables -I INPUT -m set --match-set lockheed src -j DROP
+
+
 
 
 echo [+] removing block lists
@@ -261,6 +277,9 @@ rm -f Webroot.txt
 rm -f Microsoft.txt
 rm -f splunk.txt
 rm -f rapid7.txt
+rm -f raytheon.txt
+rm -f mimecast.txt
+rm -f lockheed.txt
 
 echo [+] removing phantomjs script
 rm -f 7.js

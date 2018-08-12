@@ -55,6 +55,9 @@ The following providers/IP ranges are currently blocked:
 - Microsoft
 - Rapid7
 - Splunk
+- Raytheon
+- Mimecast
+- Lockheed Martin
 
 ## CRON job
 
