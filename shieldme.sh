@@ -62,6 +62,8 @@ array[mimecast]="https://bgp.he.net/search?search%5Bsearch%5D=Mimecast+&commit=S
 array[lockheed]="https://bgp.he.net/search?search%5Bsearch%5D=Lockheed&commit=Search"
 array[accenture]="https://bgp.he.net/search?search%5Bsearch%5D=accenture&commit=Search"
 array[kpmg]="https://bgp.he.net/search?search%5Bsearch%5D=kpmg&commit=Search"
+array[bae]="https://bgp.he.net/search?search[search]=bae&commit=Search"
+array[fsecure]="https://bgp.he.net/search?search%5Bsearch%5D=%22F-Secure%22&commit=Search"
 
 MACHINE_TYPE=`uname -m`
 if [ ${MACHINE_TYPE} == 'x86_64' ]; then
@@ -253,6 +255,16 @@ ipset create kpmg hash:net
 while read line; do ipset add kpmg $line; done < kpmg.txt
 iptables -I INPUT -m set --match-set kpmg src -j DROP
 
+ipset create bae hash:net
+while read line; do ipset add bae $line; done < bae.txt
+iptables -I INPUT -m set --match-set bae src -j DROP
+
+ipset create fsecure hash:net
+while read line; do ipset add fsecure $line; done < fsecure.txt
+iptables -I INPUT -m set --match-set fsecure src -j DROP
+
+
+
 echo [+] removing block lists
 rm -f tor_current_nodes.txt
 rm -f tor_current_nodes_torlist.txt
@@ -289,6 +301,8 @@ rm -f mimecast.txt
 rm -f lockheed.txt
 rm -f accenture.txt
 rm -f kpmg.txt
+rm -f bae.txt
+rm -f fsecure.txt
 
 echo [+] removing phantomjs script
 rm -f 7.js

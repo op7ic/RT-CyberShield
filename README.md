@@ -60,6 +60,8 @@ The following providers/IP ranges are currently blocked:
 - Lockheed Martin
 - Accenture
 - KPMG
+- BAE Systems
+- F-Secure
 
 ## CRON job
 
