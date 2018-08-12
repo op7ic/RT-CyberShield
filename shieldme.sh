@@ -3,15 +3,13 @@
 # Tested on Debian.
 # author: op7ic
 
-
-if [ -f /etc/redhat-release ]; then
-  yum -y update
-  yum -y install ipset iptables curl fontconfig libfontconfig
-fi
-
-if [ -f /etc/lsb-release ]; then
-  apt-get -y update
-  apt-get install -y ipset iptables curl fontconfig libfontconfig
+# do installation based on which package manager is available.
+if VERB="$( which apt-get )" 2> /dev/null; then
+   apt-get -y update
+   apt-get install -y ipset iptables curl fontconfig libfontconfig
+elif VERB="$( which yum )" 2> /dev/null; then
+   yum -y update
+   yum -y install ipset iptables curl fontconfig libfontconfig
 fi
 
 echo [+] Dropping script for phantomjs
