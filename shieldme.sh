@@ -1,6 +1,6 @@
 #!/bin/bash
 # This script should be deployed on your red team infrastructure to protect you from these pesky blue teams
-# Tested on Debian.
+# Tested on Debian/Centos
 # author: op7ic
 
 # do installation based on which package manager is available.
