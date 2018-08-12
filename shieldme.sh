@@ -9,7 +9,7 @@ if VERB="$( which apt-get )" 2> /dev/null; then
    apt-get install -y ipset iptables curl fontconfig libfontconfig
 elif VERB="$( which yum )" 2> /dev/null; then
    yum -y update
-   yum -y install ipset iptables curl fontconfig libfontconfig
+   yum -y install ipset iptables curl fontconfig libfontconfig bzip2
 fi
 
 echo [+] Dropping script for phantomjs
