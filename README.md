@@ -58,6 +58,7 @@ The following providers/IP ranges are currently blocked:
 - Raytheon
 - Mimecast
 - Lockheed Martin
+- Accenture
 
 ## CRON job
 
