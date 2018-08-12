@@ -273,8 +273,6 @@ ipset create ncc hash:net
 while read line; do ipset add ncc $line; done < ncc.txt
 iptables -I INPUT -m set --match-set ncc src -j DROP
 
-ncc
-
 echo [+] removing block lists
 rm -f tor_current_nodes.txt
 rm -f tor_current_nodes_torlist.txt
