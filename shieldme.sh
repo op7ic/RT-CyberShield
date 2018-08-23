@@ -145,7 +145,7 @@ ipset create cloudflare4 hash:net
 while read line; do ipset add cloudflare4 $line; done < cloudflare-ip4.txt
 iptables -I INPUT -m set --match-set cloudflare4 src -j DROP
 
-ipset create cloudflare6 hash:net
+ipset create cloudflare6 hash:net family inet6
 while read line; do ipset add cloudflare6 $line; done < cloudflare-ip6.txt
 iptables -I INPUT -m set --match-set cloudflare6 src -j DROP
 
@@ -272,6 +272,7 @@ iptables -I INPUT -m set --match-set trendmicro src -j DROP
 ipset create ncc hash:net
 while read line; do ipset add ncc $line; done < ncc.txt
 iptables -I INPUT -m set --match-set ncc src -j DROP
+
 
 echo [+] removing block lists
 rm -f tor_current_nodes.txt

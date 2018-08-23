@@ -157,11 +157,22 @@ iptables -I INPUT -m set --match-set OVH src -j DROP
 iptables -I INPUT -m set --match-set WatchGuard src -j DROP
 iptables -I INPUT -m set --match-set Webroot src -j DROP
 iptables -I INPUT -m set --match-set Microsoft src -j DROP
+iptables -I INPUT -m set --match-set Splunk src -j DROP
+iptables -I INPUT -m set --match-set Rapid7 src -j DROP
+iptables -I INPUT -m set --match-set raytheon src -j DROP
+iptables -I INPUT -m set --match-set mimecast src -j DROP
+iptables -I INPUT -m set --match-set lockheed src -j DROP
+iptables -I INPUT -m set --match-set accenture src -j DROP
+iptables -I INPUT -m set --match-set kpmg src -j DROP
+iptables -I INPUT -m set --match-set bae src -j DROP
+iptables -I INPUT -m set --match-set fsecure src -j DROP
+iptables -I INPUT -m set --match-set trendmicro src -j DROP
+iptables -I INPUT -m set --match-set ncc src -j DROP
 ```
 
 ## Limitations
 
-- Ipset doesn't like ipv6 ranges (WIP)
+- IPv6 ranges (WIP)
 - This script relies heavily on https://bgp.he.net portal.
 - If you have VPS-To-VPS communication (i.e. Cobalt Strike to Fronting Server on OVH) the range might get blocked. Be careful where/how you set this script up or comment out specific ranges from config file
 - The script relies on precomipled version of phantomjs
