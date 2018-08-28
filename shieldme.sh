@@ -147,7 +147,7 @@ iptables -I INPUT -m set --match-set cloudflare4 src -j DROP
 
 ipset create cloudflare6 hash:net family inet6
 while read line; do ipset add cloudflare6 $line; done < cloudflare-ip6.txt
-iptables -I INPUT -m set --match-set cloudflare6 src -j DROP
+ip6tables -I INPUT -m set --match-set cloudflare6 src -j DROP
 
 ipset create cisco hash:net
 while read line; do ipset add cisco $line; done < cisco.txt
