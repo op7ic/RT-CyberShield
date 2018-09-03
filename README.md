@@ -65,6 +65,18 @@ The following providers/IP ranges are currently blocked:
 - F-Secure
 - Trend Micro
 - NCC
+- eSentire
+- Alibaba
+- Hornetsecurity
+- InteliSecure
+- Masergy
+- NTT Security
+- Check Point
+- Atos 
+- CGI
+- SecureWorks
+- TCS
+- Unisys
 
 ## CRON job
 
@@ -177,6 +189,18 @@ iptables -I INPUT -m set --match-set bae src -j DROP
 iptables -I INPUT -m set --match-set fsecure src -j DROP
 iptables -I INPUT -m set --match-set trendmicro src -j DROP
 iptables -I INPUT -m set --match-set ncc src -j DROP
+iptables -I INPUT -m set --match-set eSentire src -j DROP
+iptables -I INPUT -m set --match-set alibaba src -j DROP
+iptables -I INPUT -m set --match-set hornetsecurity src -j DROP
+iptables -I INPUT -m set --match-set InteliSecure src -j DROP
+iptables -I INPUT -m set --match-set Masergy src -j DROP
+iptables -I INPUT -m set --match-set NTTSecurity src -j DROP
+iptables -I INPUT -m set --match-set checkpoint src -j DROP
+iptables -I INPUT -m set --match-set atos src -j DROP
+iptables -I INPUT -m set --match-set CGI src -j DROP
+iptables -I INPUT -m set --match-set SecureWorks src -j DROP
+iptables -I INPUT -m set --match-set TCS src -j DROP
+iptables -I INPUT -m set --match-set Unisys src -j DROP
 ```
 ## TODO
 - [ ] IPv6 filter and ranges (ipset errors a lot right now)

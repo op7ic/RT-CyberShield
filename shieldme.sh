@@ -66,6 +66,18 @@ array[bae]="https://bgp.he.net/search?search[search]=bae&commit=Search"
 array[fsecure]="https://bgp.he.net/search?search%5Bsearch%5D=%22F-Secure%22&commit=Search"
 array[trendmicro]="https://bgp.he.net/search?search%5Bsearch%5D=%22Trend+Micro%22&commit=Search"
 array[ncc]="https://bgp.he.net/search?search%5Bsearch%5D=%22NCC+Services%22&commit=Search"
+array[eSentire]="https://bgp.he.net/search?search%5Bsearch%5D=eSentire+&commit=Search"
+array[alibaba]="https://bgp.he.net/search?search%5Bsearch%5D=Alibaba&commit=Search"
+array[hornetsecurity]="https://bgp.he.net/search?search%5Bsearch%5D=Hornetsecurity&commit=Search"
+array[InteliSecure]="https://bgp.he.net/search?search%5Bsearch%5D=InteliSecure&commit=Search"
+array[Masergy]="https://bgp.he.net/search?search%5Bsearch%5D=Masergy&commit=Search"
+array[NTTSecurity]="https://bgp.he.net/search?search%5Bsearch%5D=%22NTT+Security%22&commit=Search"
+array[checkpoint]="https://bgp.he.net/search?search%5Bsearch%5D=%22Check+Point%22&commit=Search"
+array[atos]="https://bgp.he.net/search?search%5Bsearch%5D=Atos&commit=Search"
+array[CGI]="https://bgp.he.net/search?search%5Bsearch%5D=CGI&commit=Search"
+array[SecureWorks]="https://bgp.he.net/search?search%5Bsearch%5D=SecureWorks&commit=Search"
+array[TCS]="https://bgp.he.net/search?search%5Bsearch%5D=TCS&commit=Search"
+array[Unisys]="https://bgp.he.net/search?search%5Bsearch%5D=Unisys&commit=Search"
 
 MACHINE_TYPE=`uname -m`
 if [ ${MACHINE_TYPE} == 'x86_64' ]; then
@@ -273,8 +285,68 @@ ipset create ncc hash:net
 while read line; do ipset add ncc $line; done < ncc.txt
 iptables -I INPUT -m set --match-set ncc src -j DROP
 
+ipset create eSentire hash:net
+while read line; do ipset add eSentire $line; done < eSentire.txt
+iptables -I INPUT -m set --match-set eSentire src -j DROP
+
+ipset create alibaba hash:net
+while read line; do ipset add alibaba $line; done < alibaba.txt
+iptables -I INPUT -m set --match-set alibaba src -j DROP
+
+ipset create hornetsecurity hash:net
+while read line; do ipset add hornetsecurity $line; done < hornetsecurity.txt
+iptables -I INPUT -m set --match-set hornetsecurity src -j DROP
+
+ipset create InteliSecure hash:net
+while read line; do ipset add InteliSecure $line; done < InteliSecure.txt
+iptables -I INPUT -m set --match-set InteliSecure src -j DROP
+
+ipset create Masergy hash:net
+while read line; do ipset add Masergy $line; done < Masergy.txt
+iptables -I INPUT -m set --match-set Masergy src -j DROP
+
+ipset create NTTSecurity hash:net
+while read line; do ipset add NTTSecurity $line; done < NTTSecurity.txt
+iptables -I INPUT -m set --match-set NTTSecurity src -j DROP
+
+ipset create checkpoint hash:net
+while read line; do ipset add checkpoint $line; done < checkpoint.txt
+iptables -I INPUT -m set --match-set checkpoint src -j DROP
+
+ipset create atos hash:net
+while read line; do ipset add atos $line; done < atos.txt
+iptables -I INPUT -m set --match-set atos src -j DROP
+
+ipset create CGI hash:net
+while read line; do ipset add CGI $line; done < CGI.txt
+iptables -I INPUT -m set --match-set CGI src -j DROP
+
+ipset create SecureWorks hash:net
+while read line; do ipset add SecureWorks $line; done < SecureWorks.txt
+iptables -I INPUT -m set --match-set SecureWorks src -j DROP
+
+ipset create TCS hash:net
+while read line; do ipset add TCS $line; done < TCS.txt
+iptables -I INPUT -m set --match-set TCS src -j DROP
+
+ipset create Unisys hash:net
+while read line; do ipset add Unisys $line; done < Unisys.txt
+iptables -I INPUT -m set --match-set Unisys src -j DROP
+
 
 echo [+] removing block lists
+rm -f alibaba.txt
+rm -f InteliSecure.txt
+rm -f hornetsecurity.txt
+rm -f Masergy.txt
+rm -f NTTSecurity.txt
+rm -f checkpoint.txt
+rm -f atos.txt
+rm -f CGI.txt
+rm -f SecureWorks.txt
+rm -f TCS.txt
+rm -f Unisys.txt
+rm -f eSentire.txt
 rm -f tor_current_nodes.txt
 rm -f tor_current_nodes_torlist.txt
 rm -f aws_ranges.txt
