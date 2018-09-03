@@ -178,11 +178,12 @@ iptables -I INPUT -m set --match-set fsecure src -j DROP
 iptables -I INPUT -m set --match-set trendmicro src -j DROP
 iptables -I INPUT -m set --match-set ncc src -j DROP
 ```
+## TODO
+- [ ] IPv6 filter and ranges (ipset errors a lot right now)
 
 ## Limitations
 
-- IPv6 ranges (WIP)
 - This script relies heavily on https://bgp.he.net portal.
 - If you have VPS-To-VPS communication (i.e. Cobalt Strike to Fronting Server on OVH) the range might get blocked. Be careful where/how you set this script up or comment out specific ranges from config file
-- The script relies on precomipled version of phantomjs
+- The script relies on precompiled version of phantomjs
 - Need some "for" loops in there. Its very crude script for now.
