@@ -12,6 +12,9 @@ elif VERB="$( which yum )" 2> /dev/null; then
    yum -y install ipset iptables curl fontconfig libfontconfig bzip2
 fi
 
+echo [+] adding openssl fix as per https://github.com/drwetter/testssl.sh/issues/1117
+export OPENSSL_CONF=~/bin/etc/openssl.cnf
+
 echo [+] Dropping script for phantomjs
 
 cat >> 7.js << EOF
