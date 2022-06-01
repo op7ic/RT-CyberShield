@@ -36,6 +36,7 @@ cloudtor[google]="https://www.gstatic.com/ipranges/goog.json"
 cloudtor[akamai]="https://raw.githubusercontent.com/SecOps-Institute/Akamai-ASN-and-IPs-List/master/akamai_ip_cidr_blocks.lst"
 cloudtor[twitter]="https://raw.githubusercontent.com/SecOps-Institute/TwitterIPLists/master/twitter_ipv4_cidr_blocks.lst"
 cloudtor[oracle]="https://docs.oracle.com/en-us/iaas/tools/public_ip_ranges.json"
+cloudtor[o365]="https://docs.microsoft.com/en-us/microsoft-365/enterprise/urls-and-ip-address-ranges?view=o365-worldwide"
 
 echo ===== Downloading IP blocks from rest.db.ripe.net =====
 for i in "${!providers[@]}"
