@@ -75,7 +75,7 @@ echo ===== Setting up IPv4 blocks =====
 for z in "${!providers[@]}"
   do
    if [[ -f $OUTPUT_DIR/${providers[$z]}.ipv4.txt ]]; then
-     echo [+] Setting up blocks for ${providers[$z]}
+     echo [+] Setting up IPv4 blocks for ${providers[$z]}
      ipset create ${providers[$z]} hash:net hashsize 32768 maxelem 999999999 family inet 2> /dev/null || ipset flush ${providers[$z]} 2> /dev/null
      while read line; do ipset -exist add ${providers[$z]} $line; done < $OUTPUT_DIR/${providers[$z]}.ipv4.txt 2>/dev/null
      iptables -C INPUT -m set --match-set ${providers[$z]} src -j DROP 2>/dev/null || iptables -I INPUT -m set --match-set ${providers[$z]} src -j DROP 2>/dev/null
@@ -85,7 +85,7 @@ done
 for z in "${!cloudtor[@]}"
   do
    if [[ -f $OUTPUT_DIR/$z.ipv4.txt ]]; then
-     echo [+] Setting up blocks for $z
+     echo [+] Setting up IPv4 blocks for $z
      ipset create $z hash:net hashsize 32768 maxelem 999999999 family inet 2> /dev/null || ipset flush $z 2> /dev/null
      while read line; do ipset -exist add $z $line; done < $OUTPUT_DIR/$z.ipv4.txt 2>/dev/null
      iptables -C INPUT -m set --match-set $z src -j DROP 2>/dev/null || iptables -I INPUT -m set --match-set $z src -j DROP 2>/dev/null
