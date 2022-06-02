@@ -74,20 +74,20 @@ done
 echo ===== Setting up IPv4 blocks =====
 for z in "${!providers[@]}"
   do
-   if test -f $OUTPUT_DIR/${providers[$z]}.ipv4.txt; then
+   if [[ -f $OUTPUT_DIR/${providers[$z]}.ipv4.txt ]]; then
      echo [+] Setting up blocks for ${providers[$z]}
      ipset create ${providers[$z]} hash:net hashsize 32768 maxelem 999999999 family inet 2> /dev/null || ipset flush ${providers[$z]} 2> /dev/null
-     while read line 2>/dev/null; do ipset -exist add ${providers[$z]} $line 2>/dev/null; done < $OUTPUT_DIR/${providers[$z]}.ipv4.txt 2>/dev/null
+     while read line; do ipset -exist add ${providers[$z]} $line; done < $OUTPUT_DIR/${providers[$z]}.ipv4.txt 2>/dev/null
      iptables -C INPUT -m set --match-set ${providers[$z]} src -j DROP 2>/dev/null || iptables -I INPUT -m set --match-set ${providers[$z]} src -j DROP 2>/dev/null
    fi
 done
 
 for z in "${!cloudtor[@]}"
   do
-   if test -f $OUTPUT_DIR/$z.ipv4.txt; then
+   if [[ -f $OUTPUT_DIR/$z.ipv4.txt ]]; then
      echo [+] Setting up blocks for $z
      ipset create $z hash:net hashsize 32768 maxelem 999999999 family inet 2> /dev/null || ipset flush $z 2> /dev/null
-     while read line 2>/dev/null; do ipset -exist add $z $line 2>/dev/null; done < $OUTPUT_DIR/$z.ipv4.txt 2>/dev/null
+     while read line; do ipset -exist add $z $line; done < $OUTPUT_DIR/$z.ipv4.txt 2>/dev/null
      iptables -C INPUT -m set --match-set $z src -j DROP 2>/dev/null || iptables -I INPUT -m set --match-set $z src -j DROP 2>/dev/null
    fi
 done
@@ -95,20 +95,20 @@ done
 echo ===== Setting up IPv6 blocks =====
 for z in "${!providers[@]}"
   do
-   if test -f $OUTPUT_DIR/${providers[$z]}.ipv6.txt; then
+   if [[ -f $OUTPUT_DIR/${providers[$z]}.ipv6.txt ]]; then
      echo [+] Setting up IPv6 blocks for ${providers[$z]}
      ipset create "${providers[$z]}_ip6" hash:net hashsize 32768 maxelem 999999999 family inet6 2> /dev/null || ipset flush "${providers[$z]}_ip6" 2> /dev/null
-     while read line 2>/dev/null; do ipset -exist add "${providers[$z]}_ip6" $line 2>/dev/null; done < $OUTPUT_DIR/${providers[$z]}.ipv6.txt 2>/dev/null
+     while read line; do ipset -exist add "${providers[$z]}_ip6" $line; done < $OUTPUT_DIR/${providers[$z]}.ipv6.txt 2>/dev/null
      ip6tables -C INPUT -m set --match-set "${providers[$z]}_ip6" src -j DROP 2>/dev/null || ip6tables -I INPUT -m set --match-set "${providers[$z]}_ip6" src -j DROP 2>/dev/null
    fi
 done
 
 for z in "${!cloudtor[@]}" 
   do
-   if test -f $OUTPUT_DIR/$z.ipv6.txt; then
+   if [[ -f $OUTPUT_DIR/$z.ipv6.txt ]]; then
      echo [+] Setting up IPv6 blocks for $z
      ipset create "$z_ip6" hash:net hashsize 32768 maxelem 999999999 family inet6 2> /dev/null || ipset flush "$z_ip6" 2> /dev/null
-     while read line 2>/dev/null; do ipset -exist add "$z_ip6" $line 2>/dev/null; done < $OUTPUT_DIR/$z.ipv6.txt 2>/dev/null
+     while read line; do ipset -exist add "$z_ip6" $line; done < $OUTPUT_DIR/$z.ipv6.txt 2>/dev/null
      ip6tables -C INPUT -m set --match-set "$z_ip6" src -j DROP 2>/dev/null || ip6tables -I INPUT -m set --match-set "$z_ip6" src -j DROP 2>/dev/null
    fi
 done
