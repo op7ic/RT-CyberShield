@@ -104,6 +104,24 @@ iptables -L INPUT -v --line-numbers
 ip6tables -L INPUT -v --line-numbers
 ```
 
+## Deleting full chain
+
+If you would like to destory the set and all the associated rules, iptables needs to be cleared first, followed by deletion of ipset rules. 
+```
+# Clean iptables list for IPv4 or delete individual rulesets using -D option for specific rule (i.e. ssh)
+iptables --flush
+
+# Clean iptables list for Ipv6 or delete individual rulesets using -D option for specific rule (i.e. ssh)
+ip6tables --flush
+
+# Remove all sets from ipset
+ipset list | grep Name | awk -F ": " '{print $2}' | xargs -i ipset destroy {}
+```
+
+## Protecting NGNIX or Apache
+
+This script will also generate config for NGNIX and Apache that can be used to block web-server level access.
+
 ## Modify the blacklists you want to use
 
 Edit [shieldme.sh](shieldme.sh) and add/remove specific lists. You can see URLs which this script feeds from. Simply modify them or comment them out.

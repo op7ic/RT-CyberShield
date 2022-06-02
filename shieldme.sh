@@ -113,8 +113,39 @@ for z in "${!cloudtor[@]}"
    fi
 done
 
-echo [+] Full list of blocked ranges is in `pwd`/blockedranges.txt
+echo [+] Full list of blocked ranges is in `pwd`/RT-CyberShield-blocked-ranges.txt
 ipset list > RT-CyberShield-blocked-ranges.txt
 echo [+] Saving full firewall block list to /etc/ipset.conf
 ipset save > /etc/ipset.conf
+
+echo ===== Generating NGINX block file - based on GEO module =====
+echo "[!] Note that separate installation of libnginx-mod-http-geoip is required"
+ipset list | grep "/" > `pwd`/ipset_ip_extract.txt
+echo "geo \$redblock {" > `pwd`/ngix_block.conf
+while read line; do
+echo "$line  0;" >> `pwd`/ngix_block.conf;
+done < `pwd`/ipset_ip_extract.txt
+echo "}" >> `pwd`/ngix_block.conf;
+echo "server {" >> `pwd`/ngix_block.conf;
+echo "if (\$redblock) {" >> `pwd`/ngix_block.conf;
+echo " rewrite ^ http://www.google.com/;" >> `pwd`/ngix_block.conf;
+echo " }" >> `pwd`/ngix_block.conf;
+echo "}" >> `pwd`/ngix_block.conf;
+echo [+] NGINX block list can be found in `pwd`/ngix_block.conf
+echo [+] Move `pwd`/ngix_block.conf to /etc/nginx/conf.d/ folder and restart nginx
+
+echo ===== Generating Apache mod_rewrite .htaccess =====
+echo "[!] Note that you need to enable rewrite with a2enmod rewrite and restart apache server"
+touch `pwd`/mod_rewrite.htaccess
+echo "RewriteEngine On" >> `pwd`/mod_rewrite.htaccess;
+while read line; do
+echo "RewriteCond expr \"-R '$line'\"" >> `pwd`/mod_rewrite.htaccess;
+done < `pwd`/ipset_ip_extract.txt
+echo "RewriteRule ^/(.*)?$ http://www.google.com/$1 [R=301,NC,NE,L]" >> `pwd`/mod_rewrite.htaccess;
+echo [+] Apache mod_rewrite block list can be found in `pwd`/mod_rewrite.htaccess;
+echo [+] Please remember to enable rewrite in global apache config by adding AllowOverride All to directory you are protecting.
+
+echo ===== Cleanup =====
 rm -rf $OUTPUT_DIR
+rm -rf `pwd`/ipset_ip_extract.txt
+
