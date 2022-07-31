@@ -19,7 +19,7 @@ echo [+] Creating Temp Directory $OUTPUT_DIR
 mkdir $OUTPUT_DIR
 
 # Basic array to store names of security vendors
-providers=("digitalocean" "symantec" "ibm" "rackspace" "verizon" "cisco" "forcepoint" "paloalto" "barracuda" "avast" "bitdefender" "ESET" "FireEye" "fortinet" "kaspersky" "McAfee" "Sophos" "OVH" "WatchGuard" "Webroot" "Microsoft" "splunk" "rapid7" "raytheon" "mimecast" "lockheed" "accenture" "kpmg" "bae" "fsecure" "trendmicro" "eSentire" "alibaba" "hornetsecurity" "InteliSecure" "Masergy" "NTTSecurity" "checkpoint" "atos" "CGI" "DELL" "TCS" "Unisys" "CrowdStrike" "VMware" "Broadcom" "BlackBerry" "Cynet" "RSA" "cylance" "gdata" "virus")
+providers=("digitalocean" "symantec" "ibm" "rackspace" "verizon" "cisco" "forcepoint" "paloalto" "barracuda" "avast" "bitdefender" "ESET" "FireEye" "fortinet" "kaspersky" "McAfee" "Sophos" "OVH" "WatchGuard" "Webroot" "Microsoft" "splunk" "rapid7" "raytheon" "mimecast" "lockheed" "accenture" "kpmg" "bae" "fsecure" "trendmicro" "eSentire" "alibaba" "hornetsecurity" "InteliSecure" "Masergy" "NTTSecurity" "checkpoint" "atos" "CGI" "DELL" "TCS" "Unisys" "CrowdStrike" "VMware" "Broadcom" "BlackBerry" "Cynet" "RSA" "cylance" "gdata" "virus" "trustwave")
 
 # Basic array to store details related to cloud and tor
 declare -A cloudtor
@@ -53,6 +53,17 @@ for i in "${!providers[@]}"
   echo [+] Downloading IPs for current address range for "${providers[$i]}". Extracting IPv4
   outputvar=$(curl -s -L -A "Mozilla/5.0 (Windows NT x.y; rv:10.0) Gecko/20100101 Firefox/10.0" "https://whois.arin.net/rest/org/${providers[$i]}/nets")
   echo $outputvar | grep -e "endAddress=\"\([0-9]\{1,3\}\.\)\{3\}[0-9]\{1,3\}\"[[:space:]]startAddress=\"\([0-9]\{1,3\}\.\)\{3\}[0-9]\{1,3\}" -o | awk -F "\"" '{print $4"-"$2}' >>  $OUTPUT_DIR/${providers[$i]}.ipv4.txt 2> /dev/null
+done
+
+echo ===== Downloading IP blocks from bgpview.io =====
+for i in "${!providers[@]}"
+  do
+  sleep 5
+  echo [+] Downloading IPs for current address range for "${providers[$i]}". Extracting IPv4
+  outputvar=$(curl -s -L -A "Mozilla/5.0 (Windows NT x.y; rv:10.0) Gecko/20100101 Firefox/10.0" "https://bgpview.io/search/{providers[$i]}#results-v4")
+  echo $outputvar | grep -o -E '([0-9]{1,3}\.){3}[0-9]{1,3}(/[0-9]{1,2})?' | grep -v "127\.0\.0\.1" | sort | uniq >>  $OUTPUT_DIR/${providers[$i]}.ipv4.txt 2> /dev/null
+  outputvar=$(curl -s -L -A "Mozilla/5.0 (Windows NT x.y; rv:10.0) Gecko/20100101 Firefox/10.0" "https://bgpview.io/search/{providers[$i]}#results-v6")
+  echo $outputvar | grep -E "((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:)))(%.+)?s*(\/(12[0-8]|1[0-1][0-9]|[1-9][0-9]|[0-9]))" -o | sort | uniq >> $OUTPUT_DIR/${providers[$i]}.ipv6.txt 2> /dev/null
 done
 
 echo ===== Downloading IP blocks for cloud and TOR  networks =====
